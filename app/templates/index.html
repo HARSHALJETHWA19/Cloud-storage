@@ -20,11 +20,13 @@
     <header class="bg-primary text-white text-center py-3">
         <h1>My Cloud Storage</h1>
         <div class="login-register">
-            <button class="btn btn-primary" id="loginButton" onclick="openLogin()">Login</button>
+            <button class="btn btn-success" id="loginButton" onclick="openLogin()">Login</button>
             <button class="btn btn-success" id="registerButton" onclick="openRegister()">Register</button>
             
             <!-- Docker container button -->
-            <a href="#" class="btn btn-warning" id="startDockerContainer">Start Docker Container</a>
+            <a href="http://localhost:8080" class="btn btn-primary" target="_blank" id="startWindowsContainer">Start Windows VM</a>
+            <a href="http://localhost:3000" class="btn btn-warning" target="_blank" id="startLinuxContainer">Start Linux VM</a>
+            
         </div>
     </header>
     <div class="container">
@@ -56,8 +58,8 @@
 <!-- Login Form (Initially hidden) -->
 <!-- <object id="login-form" data="./login.html" style="display: none;"></object>
 
-<!-- Register Form (Initially hidden) -->
-<object id="register-form" data="./register.html" style="display: none;"></object> -->
+Register Form (Initially hidden) -->
+<!-- <object id="register-form" data="./register.html" style="display: none;"></object> --> 
 
     <footer class="bg-primary text-white text-center py-2 mt-5">
         &copy; 2023 My Cloud Storage
@@ -80,6 +82,7 @@
             }
         }
     }
+    
         // JavaScript code for handling file upload progress
         const form = document.getElementById('upload-form');
         const progressBar = document.getElementById('progress-bar');
@@ -121,24 +124,41 @@
             window.location.href = "./register.html"; // Replace with your register page URL
         }
 
-        document.querySelector('a.btn-warning').addEventListener('click', function (event) {
-            event.preventDefault();
-            fetch('/start-docker-container', { method: 'GET' })
-                .then(response => {
-                    if (response.status === 200) {
-                        alert('Docker container started successfully.');
-                        // Redirect to the container's port 8080
-                        window.location.href = 'http://localhost:8080'; // Change the URL as needed
-                    } else {
-                        alert('Error starting Docker container.');
-                    }
-                })
-                .catch(error => {
-                    alert('Error starting Docker container: ' + error);
-                    console.log(error);
-                });
-        });
+        // document.querySelector('a.btn-warning').addEventListener('click', function (event) {
+        //     event.preventDefault();
+        //     fetch('/start-linux', { method: 'GET' })
+        //         .then(response => {
+        //             if (response.status === 200) {
+        //                 alert('LInux VM started successfully.');
+        //                 // Redirect to the container's port 8080
+        //                 window.location.href = 'http://localhost:3000'; // Change the URL as needed
+        //             } else {
+        //                 alert('Error starting .');
+        //             }
+        //         })
+        //         .catch(error => {
+        //             alert('Error starting : ' + error);
+        //             console.log(error);
+        //         });
+        // });
 
+        // document.querySelector('a.btn-warning').addEventListener('click', function (event) {
+        //     event.preventDefault();
+        //     fetch('/start-windows', { method: 'GET' })
+        //         .then(response => {
+        //             if (response.status === 200) {
+        //                 alert('Windows VM started successfully.');
+        //                 // Redirect to the container's port 8080
+        //                 window.location.href = 'http://localhost:8080/#/'; // Change the URL as needed
+        //             } else {
+        //                 alert('Error starting .');
+        //             }
+        //         })
+        //         .catch(error => {
+        //             alert('Error starting : ' + error);
+        //             console.log(error);
+        //         });
+        // });
     </script>
 </body>
 </html>

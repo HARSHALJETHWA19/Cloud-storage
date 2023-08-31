@@ -18,38 +18,60 @@ docker_client = docker.from_env()
 # ... Other routes ...
 
 
-@app.route('/start-docker-container', methods=['GET'])
-def start_docker_container():
+# @app.route('/start-windows', methods=['GET'])
+# def start_windows_docker_container():
+#     try:
+#         # Define the Docker Compose YAML content
+#         docker_compose_yaml = """
+#         version: "2"
+#         services:
+#           guacamole:
+#             image: oznu/guacamole
+#             container_name: guacamole
+#             volumes:
+#               - postgres:/config
+#             ports:
+#               - 8080:8080
+#         volumes:
+#           postgres:
+#             driver: local
+#         """
+        
+#         # Create a temporary Docker Compose file
+#         with open('docker-compose.yml', 'w') as f:
+#             f.write(docker_compose_yaml)
+        
+#         # Use subprocess to run the Docker Compose command
+#         subprocess.run(['docker-compose', '-f', 'docker-compose.yml', 'up', '-d'], cwd=os.getcwd())
+        
+#         # Remove the temporary Docker Compose file
+#         os.remove('docker-compose.yml')
+        
+#         return "Docker container started successfully."
+#     except Exception as e:
+#         return f"Error starting Docker container: {str(e)}"
+
+
+@app.route('/start-windows', methods=['GET'])
+def start_windows():
     try:
-        # Define the Docker Compose YAML content
-        docker_compose_yaml = """
-        version: "2"
-        services:
-          guacamole:
-            image: oznu/guacamole
-            container_name: guacamole
-            volumes:
-              - postgres:/config
-            ports:
-              - 8080:8080
-        volumes:
-          postgres:
-            driver: local
-        """
-        
-        # Create a temporary Docker Compose file
-        with open('docker-compose.yml', 'w') as f:
-            f.write(docker_compose_yaml)
-        
-        # Use subprocess to run the Docker Compose command
+        # Use subprocess to run the external Docker Compose file
         subprocess.run(['docker-compose', '-f', 'docker-compose.yml', 'up', '-d'], cwd=os.getcwd())
-        
-        # Remove the temporary Docker Compose file
-        os.remove('docker-compose.yml')
         
         return "Docker container started successfully."
     except Exception as e:
         return f"Error starting Docker container: {str(e)}"
+
+@app.route('/start-linux', methods=['GET'])
+def start_linux():
+    try:
+        # Use subprocess to run the external Docker Compose file
+        subprocess.run(['docker-compose', '-f', 'docker-compose.yml', 'up', '-d'], cwd=os.getcwd())
+        
+        return "Docker container started successfully."
+    except Exception as e:
+        return f"Error starting Docker container: {str(e)}"
+
 # Configure MongoDB
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/cloudstorage'
 mongo = PyMongo(app)
